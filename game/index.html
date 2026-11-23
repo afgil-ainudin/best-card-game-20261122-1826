@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Court — a duel of cards</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+<div id="table">
+  <header id="topbar">
+    <div class="brand">EMBER COURT</div>
+    <div id="roundBadge" class="pill">Round 1</div>
+    <div id="flowBadge" class="pill flow-off">Flow: —</div>
+    <div class="spacer"></div>
+    <button id="helpBtn" class="mini-btn" type="button">How to play</button>
+    <button id="soundBtn" class="mini-btn" type="button">Sound: on</button>
+  </header>
+
+  <section id="rivalRow" class="side-row">
+    <div class="fighter" id="rivalFighter">
+      <div class="portrait rival-portrait" aria-hidden="true">♛</div>
+      <div class="fighter-info">
+        <div class="fighter-name">Queen Cinder <span class="tag">RIVAL</span></div>
+        <div class="hp-track"><div id="rivalHpFill" class="hp-fill rival"></div><span id="rivalHpText" class="hp-text">30 / 30</span></div>
+        <div id="rivalRounds" class="rounds-won">Rounds won: 0</div>
+        <div id="rivalTell" class="queen-tell">She studies your hand, weighing her next card.</div>
+      </div>
+    </div>
+    <div id="rivalHand" class="mini-hand" aria-label="Rival hand"></div>
+    <div id="rivalDeck" class="deck-pile"><span id="rivalDeckCount">24</span><small>deck</small></div>
+  </section>
+
+  <section id="arena">
+    <div id="rivalCardSlot" class="card-slot"><span class="slot-hint">Rival plays here</span></div>
+    <div id="versus">
+      <div id="vsMark">VS</div>
+      <div id="roundResult" class="round-result"></div>
+    </div>
+    <div id="playerCardSlot" class="card-slot"><span class="slot-hint">Your card goes here</span></div>
+    <div id="floatLayer"></div>
+  </section>
+
+  <section id="playerRow" class="side-row">
+    <div class="fighter" id="playerFighter">
+      <div class="portrait player-portrait" aria-hidden="true">⚔</div>
+      <div class="fighter-info">
+        <div class="fighter-name">You <span class="tag you">CHALLENGER</span></div>
+        <div class="hp-track"><div id="playerHpFill" class="hp-fill you"></div><span id="playerHpText" class="hp-text">30 / 30</span></div>
+        <div id="playerRounds" class="rounds-won">Rounds won: 0</div>
+      </div>
+    </div>
+    <div id="playerDeck" class="deck-pile"><span id="playerDeckCount">24</span><small>deck</small></div>
+  </section>
+
+  <section id="handRow">
+    <div id="handHint">Pick a card to duel — click it or press 1–5</div>
+    <div id="playerHand" class="hand"></div>
+  </section>
+
+  <aside id="logPanel">
+    <div class="log-title">COURT LOG</div>
+    <ol id="logList"></ol>
+  </aside>
+
+  <div id="titleScreen" class="overlay">
+    <div class="overlay-card title-card">
+      <div class="crown">♛</div>
+      <h1>EMBER COURT</h1>
+      <p class="subtitle">A duel of cards against Queen Cinder</p>
+      <div class="wheel">
+        <span class="wheel-chip flame">Flame beats Thorn</span>
+        <span class="wheel-chip thorn">Thorn beats Tide</span>
+        <span class="wheel-chip tide">Tide beats Storm</span>
+        <span class="wheel-chip storm">Storm beats Flame</span>
+      </div>
+      <p class="rules-short">Each round you both play one card. Higher power wins the round and
+      strikes for the difference — plus 2 when your element beats theirs. Play the same
+      element twice in a row for a <b>+2 Flow</b> bonus. First to bring the other to 0 life wins the court.</p>
+      <button id="startBtn" class="big-btn" type="button">Take your seat</button>
+      <p class="keys-hint">Mouse or keys 1–5 to play · H for rules · M to mute</p>
+    </div>
+  </div>
+
+  <div id="helpScreen" class="overlay hidden">
+    <div class="overlay-card help-card">
+      <h2>How to play</h2>
+      <ul>
+        <li><b>Goal:</b> reduce Queen Cinder from 30 life to 0 before she does the same to you.</li>
+        <li><b>Each round</b> you both play one card face down, then reveal together.</li>
+        <li><b>Power wins:</b> the higher power takes the round and deals damage equal to the difference (minimum 1).</li>
+        <li><b>Element wheel:</b> Flame &gt; Thorn &gt; Tide &gt; Storm &gt; Flame. Winning with the beating element deals +2 damage.</li>
+        <li><b>Flow:</b> play the same element as your last round for +2 power.</li>
+        <li><b>Abilities:</b> Flame cards Burn (+2 damage on a win) · Tide cards Soak (heal 3) · Thorn cards Barbs (3 damage back if you lose) · Storm cards Surge (+3 power after a loss) · Mirror Wisp copies the rival's power — two Wisps meet at 5 · Fate Jester wins ties.</li>
+        <li><b>Draw:</b> you draw one card each round. When the deck runs out, the discard pile is shuffled back in.</li>
+        <li><b>Read the Queen:</b> she saves big cards when ahead and strikes hard when behind — bait her, then answer.</li>
+      </ul>
+      <button id="closeHelpBtn" class="big-btn" type="button">Back to the table</button>
+    </div>
+  </div>
+
+  <div id="endScreen" class="overlay hidden">
+    <div class="overlay-card end-card">
+      <div id="endEmblem" class="end-emblem">♛</div>
+      <h1 id="endTitle">You win the court!</h1>
+      <p id="endLine" class="subtitle"></p>
+      <div id="endStats" class="end-stats"></div>
+      <button id="againBtn" class="big-btn" type="button">Duel again</button>
+    </div>
+  </div>
+</div>
+<p id="status" role="status" aria-live="polite"></p>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
